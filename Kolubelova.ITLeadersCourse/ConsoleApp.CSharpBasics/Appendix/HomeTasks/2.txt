@@ -1,0 +1,55 @@
+﻿// Using swith
+
+int actualInteger = 15;
+
+            Out.Write("Input any integer: ");
+            int Integer;
+            Integer = int.Parse(In.ReadLine());
+
+            switch (Integer)
+            {
+                case < 10:
+                case > 20:
+                    Out.WriteLine("Your integer is out of range!");
+                    break;
+                case < 15:
+                    Out.WriteLine("You are wrong! Your number is less!");
+                    break;
+                case > 15:
+                    Out.WriteLine("You are wrong! Your number is greater!");
+                    break;
+
+                case int:
+                    Out.WriteLine("Correct! This is { actualInteger}");
+
+// 2. Using if..else
+
+int InputInteger = 0;
+            int actualInteger;
+            actualInteger = 15;
+               
+            int a, b;
+                a = 10;
+                b = 20;
+            Out.Write("Input any integer: ");
+            int inputInteger = int.Parse(In.ReadLine());
+
+            if ((InputInteger < a) && (InputInteger > b)) 
+            {
+                Out.WriteLine("Your integer is out of range!");
+            }
+            else
+                if (inputInteger > actualInteger)
+                {
+                    Out.WriteLine("You are wrong! Your number is greater!");
+                }
+                else
+                    if (InputInteger < actualInteger)
+                {
+                    Out.WriteLine("You are wrong! Your number is less!");
+                }
+                    else
+                          if (inputInteger == actualInteger)
+                {
+                    Out.WriteLine("Correct! This is " + actualInteger);
+                }

@@ -1,31 +1,35 @@
 ﻿using System;
 using static ConsoleApp.CSharpBasics.IO.Output;
+using static ConsoleApp.CSharpBasics.IO.Input;
 
 namespace ConsoleApp.CSharpBasics
-    {
+{
     class Program
     {
         static void Main(string[] args)
         {
-            //A program that calculates sum of three numbers 
-            Out.WriteLine("Program1: Calculates sum");
-            int a = 5;
-            int b = 2;
-            int c = 8;
-            int sum = a + b + c;
-            Out.WriteLine("a=" + a +";" +" "+ "b=" + b +";" +" " + "c="  + c);
-            Out.WriteLine("sum=" + sum);
-            Out.WriteLine();
+            int actualInteger = 15;
 
-            //A program that prints perimeter and area of circle with knowns radius
-            Out.WriteLine("Program2: Circle perimeter and area calculating");
-            double radius = 3.5;
-            double area = Math.PI * Math.Pow(radius, 2);
-            double perimeter = 2 * radius * Math.PI;
-            Out.WriteLine("Circle radius = " + radius);
-            Out.WriteLine("Circle area = " + area);
-            Out.WriteLine("Circle perimeter = " + perimeter);
+            Out.Write("Input any integer: ");
+            int Integer;
+            Integer = int.Parse(In.ReadLine());
 
+            switch (Integer)
+            {
+                case < 10:
+                case > 20:
+                    Out.WriteLine("Your integer is out of range!");
+                    break;
+                case < 15:
+                    Out.WriteLine("You are wrong! Your number is less!");
+                    break;
+                case > 15:
+                    Out.WriteLine("You are wrong! Your number is greater!");
+                    break;
+
+                case int:
+                    Out.WriteLine("Correct! This is { actualInteger}");
+            }
         }
     }
 }

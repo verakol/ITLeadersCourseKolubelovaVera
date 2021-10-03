@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ConsoleApp.CSharpBasics.IO.Implementations;
+using ConsoleApp.CSharpBasics.IO.Interfaces;
 
 namespace ConsoleApp.CSharpBasics.IO
 {
-    using ConsoleApp.CSharpBasics.IO.Implementations;
-    using ConsoleApp.CSharpBasics.IO.Interfaces;
-
     public class Input
     {
         private static IInput input;
@@ -26,5 +25,4 @@ namespace ConsoleApp.CSharpBasics.IO
             }
         }
     }
-    
 }
