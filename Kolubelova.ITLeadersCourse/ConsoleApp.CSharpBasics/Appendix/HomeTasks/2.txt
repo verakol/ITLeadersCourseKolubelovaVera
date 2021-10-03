@@ -1,55 +1,73 @@
-﻿// Using swith
+﻿namespace ConsoleApp.CSharpBasics
+{
+    using static ConsoleApp.CSharpBasics.IO.Input;
+    using static ConsoleApp.CSharpBasics.IO.Output;
 
-int actualInteger = 15;
-
-            Out.Write("Input any integer: ");
-            int Integer;
-            Integer = int.Parse(In.ReadLine());
-
-            switch (Integer)
-            {
-                case < 10:
-                case > 20:
-                    Out.WriteLine("Your integer is out of range!");
-                    break;
-                case < 15:
-                    Out.WriteLine("You are wrong! Your number is less!");
-                    break;
-                case > 15:
-                    Out.WriteLine("You are wrong! Your number is greater!");
-                    break;
-
-                case int:
-                    Out.WriteLine("Correct! This is { actualInteger}");
-
-// 2. Using if..else
-
-int InputInteger = 0;
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int x;
             int actualInteger;
             actualInteger = 15;
-               
-            int a, b;
-                a = 10;
-                b = 20;
-            Out.Write("Input any integer: ");
-            int inputInteger = int.Parse(In.ReadLine());
 
-            if ((InputInteger < a) && (InputInteger > b)) 
+            int a, b;
+            a = 10;
+            b = 20;
+            Out.Write("Input any integer: ");
+            x = int.Parse(In.ReadLine());
+
+            if (x == actualInteger)
+            {
+                Out.WriteLine("Correct! This is " + actualInteger);
+            }
+            else
+                if (x < a || x > b)
             {
                 Out.WriteLine("Your integer is out of range!");
             }
             else
-                if (inputInteger > actualInteger)
-                {
-                    Out.WriteLine("You are wrong! Your number is greater!");
-                }
-                else
-                    if (InputInteger < actualInteger)
-                {
-                    Out.WriteLine("You are wrong! Your number is less!");
-                }
-                    else
-                          if (inputInteger == actualInteger)
-                {
-                    Out.WriteLine("Correct! This is " + actualInteger);
-                }
+                    if (x > actualInteger)
+            {
+                Out.WriteLine("You are wrong! Your number is greater!");
+            }
+            else
+            {
+                Out.WriteLine("You are wrong! Your number is less!");
+            }
+
+            int z;
+            const int actualInt = 15;
+            const int c = 10;
+            const int d = 20;
+            
+            Out.Write("Input any integer: ");
+            z = int.Parse(In.ReadLine());
+            
+            switch (z)
+            {
+                case actualInt:
+                    Out.WriteLine("Correct! This is "+ actualInt);
+                    break;
+                default:
+                    switch (z)
+                    {
+                        case < c:
+                        case > d:
+                            Out.WriteLine("Your integer is out of range!");
+                            break;
+                        case < actualInt:
+                            Out.WriteLine("You are wrong! Your number is less!");
+                            break;
+                        case > actualInt:
+                            Out.WriteLine("You are wrong! Your number is greater!");
+                            break;
+                        default:
+                            Out.WriteLine("Sorry, unexpated result!");
+                            break;
+                    }
+                    break;
+            }
+        }
+     }
+}
