@@ -1,0 +1,120 @@
+﻿using System;
+using static ConsoleApp.CSharpBasics.IO.Output;
+using static ConsoleApp.CSharpBasics.IO.Input;
+
+namespace ConsoleApp.CSharpBasics
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Task 1 Program transefer given array of integers into another one in reverse oder and print the reversed array in console.
+                    // 1st version
+
+            
+            int[] integerArray = { 1, 2, 3, 4, 5 };
+            int[] integerArray2 = new int[integerArray.Length];
+
+            for (int i = integerArray2.Length - 1; i >= 0; i--)
+            {
+                integerArray2[integerArray.Length - i - 1] = integerArray[i];
+            }
+            
+            for (int i = 0; i < integerArray2.Length; i++)
+            {
+                Out.Write(integerArray2[i] + " ");
+            }
+
+
+
+                   //2d version
+
+
+            int[] integerArray = { 1, 2, 3, 4, 5 };
+            int[] integerArray2 = new int[integerArray.Length];
+            for (int i = 0; i < integerArray.Length; i++)
+            {
+                integerArray2[integerArray.Length - i - 1] = integerArray[i];
+            }
+            for (int i = 0; i < integerArray2.Length; i++)
+            {
+                Out.Write(integerArray2[i] + " ");
+            }
+
+
+
+                 //3d version
+
+            int i;
+            int[] integersArray = { 1, 2, 3, 4, 5 };
+            int[] newIntegersArray = new int[integersArray.Length];
+            Out.WriteLine("integersArray: ");
+            for (i = 0; i < integersArray.Length; i++)
+            {
+                Out.WriteLine(" " + integersArray[i]);
+            }
+            Array.Copy(integersArray, newIntegersArray, newIntegersArray.Length);
+            Array.Reverse(newIntegersArray);
+            Out.WriteLine("reverseIntegersArray: ");
+            foreach (int k in newIntegersArray)
+            {
+                Out.Write(k + " ");
+            }
+            
+
+            Task 2 The program can reverse oder in the same array without using additional one
+                  
+
+            int i;
+            int[] integersArray = { 1, 2, 3, 4, 5 };
+            Out.WriteLine("integersArray: ");
+            for (i = 0; i < integersArray.Length; i++)
+            {
+                Out.WriteLine(" " + integersArray[i]);
+            }
+            Array.Reverse(integersArray);
+            Out.WriteLine("reverseIntegersArray: ");
+            for (i = 0; i < integersArray.Length; i++)
+            {
+                Out.WriteLine(" " + integersArray[i]);
+            }
+
+              
+        
+           Task 3 A program that asks user to input login and password, "Q" for exit and checks them.
+           //do-while loop
+
+            string login = string.Empty;
+            string password = string.Empty;
+            const string userLogin = "Vera";
+            const string userPassword = "12345";
+            bool isLoginSuccess = false;
+            
+            Out.WriteLine("Program: Input your login and password. For exit Press Q");
+                        
+            do
+            {
+                Out.Write("Input your login, please: ");
+                login = In.ReadLine();
+                               
+                Out.Write("Input your password, please: ");
+                password = In.ReadLine();
+                
+
+                if (login == userLogin && password == userPassword)
+                    {
+                        Out.WriteLine("You are logged in.");
+                        isLoginSuccess = true;
+                    }
+                    
+                else
+                {
+                    if (login == "Q" || password == "Q")
+                    {
+                    Out.WriteLine("Password or login are wrong. Input them once more please.");
+                        break;
+                    }
+                }
+             } while (!isLoginSuccess);
+
+
