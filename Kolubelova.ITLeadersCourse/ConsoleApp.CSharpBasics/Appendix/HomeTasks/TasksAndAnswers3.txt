@@ -1,0 +1,171 @@
+﻿1. Write a program that has given an array of integers
+   int[] integersArray = { 1, 2, 3, 4, 5 }
+   Program should transefer given array of integers into another one in reverse oder and print the reversed array in console.
+
+2. Rewrite program in task 1 so that the program can reverse oder in the same array without using additional one.
+
+3. Write a program that asks user to input login and password, "Q" for exit and checks them.
+   In case login and password are correct the program prints "You are logged in." and finishes its work.
+   In case login and password are wrong ask to input them again "Password or login are wrong. Input them once more please.".
+   In case "Q" was inputted in login or password the program finishes its work printing "Good bye!"
+
+4. Rewrite the program form task 3 so that the user has only three atempts to input its correct loggin and password.
+   In case login and password are correct the program prints "You are logged in." and finishes its work.
+   In case login and password are wrong ask to input them again and print the amounts of attemts left.
+   In case 3 attemts was used the program prints "Sorry, try again later." and finishes its work.
+
+5. (Optional) 
+   1. Print triangle so that its right angle is in the top right.
+   2. Print triangle so that its right angle is in the bottom right.
+
+   *****
+	****
+	 ***
+	  **
+	   *
+
+	   *
+	  **
+	 ***
+	****
+   *****
+
+Link to Lesson 3 video: https://drive.google.com/file/d/1ogJVMp3YIRO6qb0Zt4aeTf1mtD3e2xrz/view?usp=sharing
+
+Answers
+-------------------------------------------------------------------------------------------------------------------
+Task 1
+
+static void Main() 
+{ 
+	int[] array = { 1, 2, 3, 4, 5 }; 
+	int length = array.Length; 
+	int[] reversed = new int[length]; 
+ 
+	for (int index = 0; index < length; index++) 
+	{ 
+		reversed[length - index - 1] = array[index]; 
+	} 
+ 
+	for (int index = 0; index < length; index++) 
+	{ 
+		Out.Write(reversed[index] + " "); 
+	} 
+}
+
+-------------------------------------------------------------------------------------------------------------------
+Task 2
+
+int[] arr = { 1, 2, 3, 4, 5 };
+int temp;
+
+for (int i = 0; i < arr.Length / 2; i++)
+{
+	temp = arr[i];
+	arr[i] = arr[arr.Length - i - 1];
+	arr[arr.Length - i - 1] = temp;
+}
+
+foreach (var item in arr)
+{
+	Out.Write(item + " ");
+}
+
+-------------------------------------------------------------------------------------------------------------------
+Task 3
+
+const string userPassword = "12345";
+const string quitMarker = "Q";
+
+string login;
+string password;
+bool isLogInSuccess = false;
+
+do
+{
+	Out.Write("Input your login: ");
+	login = In.ReadLine();
+	Out.Write("Input your password: ");
+	password = In.ReadLine();
+
+	if(login == userLogin && password == userPassword)
+	{
+		Out.WriteLine("You are logged in successfully.");
+		isLogInSuccess = true;
+	}
+	else
+	{
+		if(login == quitMarker || password == quitMarker)
+		{
+			Out.WriteLine("Good bye!");
+			break;
+		}
+		else
+		{
+			Out.WriteLine("Password or login are wrong. Input them once more please.");
+		}
+	}
+} while (!isLogInSuccess);
+
+-------------------------------------------------------------------------------------------------------------------
+Task 4
+
+string userLogin = "nickname";
+string userPassword = "12345";
+int attempts = 3;
+
+string login;
+string password;
+
+for (int attempt = 1; attempt <= attempts; attempt++)
+{
+	Out.Write("Input your login: ");
+	login = In.ReadLine();
+	Out.Write("Input your password: ");
+	password = In.ReadLine();
+
+	if (login == userLogin && password == userPassword)
+	{
+		Out.WriteLine("You are logged in successfully.");
+		break;
+	}
+	else if ((attempts - attempt) == 0)
+	{
+		Out.WriteLine("Sorry, try again later.");
+		break;
+	}
+	else
+	{
+		Out.WriteLine("Password or login are wrong. Input them once more please.");
+		Out.WriteLine($"{attempts - (attempt)} left!");
+	}
+}
+
+-------------------------------------------------------------------------------------------------------------------
+Task 5
+
+for (int y = 0; y < 5; y++)
+{
+	for (int x = 0; x < 5; x++)
+	{
+		if (x < y)
+			Out.Write(" ");
+		else
+			Out.Write("*");
+	}
+
+	Out.WriteLine();
+}
+
+for (int y = 0; y < 5; y++)
+{
+	for (int x = 5; x > 0; x--)
+	{
+		if (x - 1 > y)
+			Out.Write(" ");
+		else
+			Out.Write("*");
+	}
+
+	Out.WriteLine();
+}
