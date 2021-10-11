@@ -1,0 +1,83 @@
+﻿1. Download and install Visual Studio
+2. Download and install Git
+3. Create an account on GitHub
+4. Create a repository
+5. Create a work directory (e.g. ITLeaderCourse)
+6. Clone my repo in work directory first  https://github.com/user-yalif/ITLeadersCourse.git
+7. Clone your repository next to mine in your work directory
+8. Create a console application
+9. Copy Output logic
+10. Do home tasks
+
+Link to Lesson 1 video: https://drive.google.com/file/d/1J8dyBNJ6gwTo59Tt99qyCzR8-1cBAqvt/view?usp=sharing
+
+Optional
+-------------------------------------------------------------------------------------------------------------
+11. Write a program that calculates sum of three numbers of type int and prints their sum.
+
+12. Write a program that has given the radius "r" of a circle, calculates and prints its perimeter and area.
+
+13. Implement Input logic on basis of Output.
+    For two preceding tasks make all inputs in home tasks with Input realization.
+
+Answers
+-------------------------------------------------------------------------------------------------------------
+Task 11.
+    int a, b, c;
+    a = 1;
+    b = 2;
+    c = 3;
+
+    int sum = a + b + c;
+
+    Out.WriteLine(a + " + " + b + " + " + c + " = " + sum);
+
+-------------------------------------------------------------------------------------------------------------  
+Task 12.
+        double radius = 2.6;
+
+        double circleArea = Math.PI * Math.Pow(radius, 2);
+        double circlePerimeter = 2 * Math.PI * radius;
+
+        Out.WriteLine("Circle arrea is: " + circleArrea);
+        Out.WriteLine("Circle arrea is: " + circlePerimeter);
+
+-------------------------------------------------------------------------------------------------------------
+After Input logic implementation
+-------------------------------------------------------------------------------------------------------------
+Task 11
+    Out.WriteLine("Calculate sum of three numbers");
+    Out.WriteLine();
+
+    int firstNumber, secondNumber, thirdNumber;
+    firstNumber = secondNumber = thirdNumber = default;
+
+    Out.Write("Input first integer: ");
+    firstNumber = int.Parse(In.ReadLine());
+
+    Out.Write("Input second integer: ");
+    secondNumber = int.Parse(In.ReadLine());
+
+    Out.Write("Input third integer: ");
+    thirdNumber = int.Parse(In.ReadLine());
+
+    int sum = firstNumber + secondNumber + thirdNumber;
+
+    Out.WriteLine($"The sum of {firstNumber} + {secondNumber} + {thirdNumber} is {sum}");
+-------------------------------------------------------------------------------------------------------------
+Task 12
+    Out.WriteLine("Calculate circle perimeter and area.");
+    Out.WriteLine();
+
+    double radius = default;
+    double circleArea = 0.0;
+    double circlePerimeter = 0.0;
+
+    Out.Write("Input circle radius: ");
+    radius = double.Parse(In.ReadLine());
+
+    circleArea = Math.PI * Math.Pow(radius, 2);
+    circlePerimeter = 2 * Math.PI * radius;
+
+    Out.WriteLine("Circle area is: " + circleArea);
+    Out.WriteLine("Circle perimeter is: " + circlePerimeter);

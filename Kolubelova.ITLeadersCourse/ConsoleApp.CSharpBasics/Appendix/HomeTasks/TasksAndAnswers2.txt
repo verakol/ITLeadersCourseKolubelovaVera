@@ -1,0 +1,84 @@
+﻿1. Implement logic of Input and Output
+2. Write a program which asks a user to guess a number between some range the user doesn't know (e.g. 10 and 20).
+   Requirements:
+   1. The user inputs an integer.
+   2. If number is less than number to be guessed then program displayes message "You are wrong! Your number is less!".
+   3. If number is grater than number to be guessed then program displayes message "You are wrong! Your number is grater!".
+   4. If number is equal to number to be guessed then program displayes message "Correct! This is #."
+   5. If number is out of range then program displayes "Your number is out of range!".
+
+   Use if-else or nested if-else or switch statemnt
+   Debug the program with different input parameters to make sure it works correctly.
+
+   Link to Lesson 2 video: https://drive.google.com/file/d/1Pug-Pt6HKs-k7EGmXMv0lu5A22gyXveO/view?usp=sharing
+
+Answer
+-------------------------------------------------------------------------------------------------------------------
+Task 1.
+
+using static ConsoleApplication.CSharpBasics.IO.Input;
+using static ConsoleApplication.CSharpBasics.IO.Output;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Out.WriteLine("Try to guess a number between two numbers.");
+
+        int guessNumber;
+		const int numberToBeGuessed = 15;
+		const int minimumBorder = 10;
+		const int maximumBorder = 20;
+
+        Out.Write("Input an integer: ");
+        guessNumber = int.Parse(In.ReadLine());
+
+        if (guessNumber == numberToBeGuessed)
+        {
+            Out.WriteLine($"You are right! This is {numberToBeGuessed}");
+        }
+        else
+        {
+            if (guessNumber < minimumBorder || guessNumber > maximumBorder)
+            {
+                Out.WriteLine("Your number is out of range!");
+            }
+            else
+            {
+                if (guessNumber < numberToBeGuessed)
+                {
+                    Out.WriteLine("You are wrong! Your number is less!");
+                }
+                else if (guessNumber > numberToBeGuessed)
+                {
+                    Out.WriteLine("You are wrong! Your number is grater!");
+                }
+            }
+        }
+		
+		// Use switch only
+		switch (guessNumber)
+		{
+			case numberToBeGuessed:
+				Out.WriteLine($"You are right! This is {numberToBeGuessed}");
+				break;
+			default:
+				switch (guessNumber)
+				{
+					case < minimumBorder:
+					case > maximumBorder:
+						Out.WriteLine("Your number is out of range!");
+						break;
+					case > numberToBeGuessed:
+						Out.WriteLine("You are wrong! Your number is grater!");
+						break;
+					case < numberToBeGuessed:
+						Out.WriteLine("You are wrong! Your number is less!");
+						break;
+					default:
+						break;
+				}
+				break;
+		}
+    }
+}
