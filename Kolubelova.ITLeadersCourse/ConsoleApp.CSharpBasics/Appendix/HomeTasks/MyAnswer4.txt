@@ -1,1 +1,99 @@
-﻿
+﻿    ///TASK 2
+
+namespace ConsoleApp.CSharpBasics
+{
+    using static ConsoleApp.CSharpBasics.IO.Output;
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            WriteNewLine();
+
+            Out.WriteLine("Automation test simulation. Guess credentials");
+
+            string[] testLogins =
+            {
+                "Smb",
+                "Smth",
+                "Q",
+                "Smb"
+            };
+            string[] testPasswords =
+            {
+                "12345",
+                "54321",
+                "12345",
+                "Q"
+            };
+            string[] expectedMessages =
+            {
+                "You are logged in.",
+                "Password or login are wrong.Input them once more please.",
+                "Good bye!",
+                "Good bye!"
+             };
+
+            for (int i = 0; i < testLogins.Length; i++)
+            {
+                string actualMessage = TestGuessCredentials(testLogins[i], testPasswords[i]);
+                PrintTestResults(testLogins[i], testPasswords[i], actualMessage, expectedMessages[i]);
+            }
+
+
+            
+        }
+        public static void WriteNewLine()
+        {
+            Out.WriteLine();
+        }
+
+        public static string TestGuessCredentials(string testLogin, string testPassword)
+        {
+            const string userLogin = "Smb";
+            const string userPassword = "12345";
+            const string quitMarker = "Q";
+
+            bool isLogInSuccess = false;
+
+            do
+            {
+                if (testLogin == userLogin && testPassword == userPassword)
+                {
+                    return "You are logged in.";
+                }
+                else
+                {
+                    if (testLogin == quitMarker || testPassword == quitMarker)
+                    {
+                        return "Good bye!";
+                    }
+
+                    else
+                    {
+                        return "Password or login are wrong.Input them once more please.";
+                    }
+                }
+
+            } while (!isLogInSuccess);
+
+            
+        }
+
+        public static void PrintTestResults(string testLogin, string testPassword, string actualMessage, string expectedMessage)
+        {
+            if (actualMessage == expectedMessage)
+            {
+                Out.WriteLine($"Test login: {testLogin}; Test password: {testPassword}; Test: PASSED");
+                Out.WriteLine($"Expected message: {expectedMessage}");
+                Out.WriteLine($"Actual message: {actualMessage}");
+            }
+            else
+            {
+                Out.WriteLine($"Test login: {testLogin}; Test password: {testPassword}; Test: FAILED");
+                Out.WriteLine($"Expected message: {expectedMessage}");
+                Out.WriteLine($"Actual message: {actualMessage}");
+            }
+        }
+    }
+}
