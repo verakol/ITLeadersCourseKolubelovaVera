@@ -1,0 +1,148 @@
+﻿//Task 1
+
+public enum Directions
+        {
+            South = 8,
+            East = 6,
+            North = 4,
+            West = 2
+        }
+        static void Main(string[] args)
+        {
+
+            Directions[] testDirection =
+            {
+                Directions.South,
+                Directions.East,
+                Directions.North,
+                Directions.West,
+                0,
+                (Directions) 5
+
+            };
+
+            string[] expectedMessages =
+            {
+                "You are going SOUTH",
+                "You are going EAST",
+                "You are going NORTH",
+                "You are going WEST",
+                "Good bye!",
+                "Wrong direction!!!"
+             };
+
+            Out.WriteLine("Automation test simulation.Program: Choose direction.");
+            Out.Write();
+
+            for (int i = 0; i < testDirection.Length; i++)
+            {
+                string actualMessage = TestGuessDirection(testDirection[i]);
+                PrintTestResults(testDirection[i], actualMessage, expectedMessages[i]);
+            }
+
+        }
+
+        public static string TestGuessDirection(Directions testDirection)
+        {
+
+            do
+            {
+
+                switch ((Directions)testDirection)
+                {
+                    case Directions.South:
+                        return "You are going SOUTH";
+
+                    case Directions.East:
+                        return "You are going EAST";
+
+                    case Directions.North:
+                        return ("You are going NORTH");
+
+                    case Directions.West:
+                        return ("You are going WEST");
+
+                    default:
+                        if (testDirection != 0)
+                        {
+                            return ("Wrong direction!!!");
+                        }
+                        break;
+                }
+            } while (testDirection != 0);
+
+            return ("Good bye!");
+        }
+        public static void PrintTestResults(Directions testDirection, string actualMessage, string expectedMessage)
+        {
+            if (actualMessage == expectedMessage)
+            {
+                Out.WriteLine($"Choosed direction: {testDirection}; Test: PASSED");
+                Out.WriteLine($"Expected message: {expectedMessage}");
+                Out.WriteLine($"Actual message: {actualMessage}");
+            }
+            else
+            {
+                Out.WriteLine($"Choosed direction: {testDirection}; Test: FAILED");
+                Out.WriteLine($"Expected message: {expectedMessage}");
+                Out.WriteLine($"Actual message: {actualMessage}");
+            }
+        }
+
+
+// Task 2
+
+Out.WriteLine("Program: Get employee list with the same names.");
+
+            string[] employeeList = new string[]
+            {
+                "John Carter",
+                "John Carter",
+                "Della Moris",
+                "Pamela Anderson",
+                "Fill Smith",
+                "Della Armstrong",
+                "John Smith"
+            };
+
+            List<string> emloyeeWithTheSameNames = new();
+            List<string> matchedNames = new List<string>();
+            string lastName;
+
+            foreach (var employee in employeeList)
+            {
+                int whiteSpaceIndex = employee.IndexOf(" ");
+                
+                lastName = employee.Substring(whiteSpaceIndex).Trim;
+
+                if (!matchedNames.Contains(lastName))
+                {
+                    int counterNames = 0;
+
+                    foreach (var employeeName in employeeList)
+                    {
+                        if (employeeName.Contains(lastName))
+                        {
+                            counterNames++;
+                        }
+                    }
+
+                    if (counterNames > 1)
+                    {
+                        matchedNames.Add(lastName);
+
+                        foreach (var empl in employeeList)
+                        {
+                            if (empl.Contains(lastName))
+                            {
+                                emloyeeWithTheSameNames.Add(empl);
+                            }
+                        }
+                    }
+                }
+            }
+
+            foreach (var employee in emloyeeWithTheSameNames)
+            {
+                Out.WriteLine(employee.ToUpper());
+            }
