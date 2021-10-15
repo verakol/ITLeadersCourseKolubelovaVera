@@ -1,0 +1,7 @@
+﻿1. Simulate automation test for the program Choose direction in Lesson 5.
+   Provide program with test data and check expected messages.
+
+2. (Otional) Rewrite the program Lesson 5 Find employees with the same name so that it can find all employees with the same last name.
+   Print results.
+
+Link to Lesson 5 video: https://drive.google.com/file/d/1B8HbCtNgonDyS1h9KTq_7BlMuR5XCAcl/view?usp=sharing
