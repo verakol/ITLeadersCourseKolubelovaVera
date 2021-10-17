@@ -1,0 +1,2 @@
+﻿1. Read about Generics collections and about their methods.
+2. Define your own class and its realization.
