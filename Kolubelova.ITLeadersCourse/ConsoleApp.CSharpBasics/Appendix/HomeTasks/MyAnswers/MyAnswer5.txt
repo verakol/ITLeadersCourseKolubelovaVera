@@ -113,7 +113,7 @@ Out.WriteLine("Program: Get employee list with the same names.");
             {
                 int whiteSpaceIndex = employee.IndexOf(" ");
                 
-                lastName = employee.Substring(whiteSpaceIndex).Trim;
+                lastName = employee.Substring(whiteSpaceIndex).Trim();
 
                 if (!matchedNames.Contains(lastName))
                 {
