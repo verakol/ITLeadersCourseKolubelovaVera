@@ -8,6 +8,12 @@ namespace ConsoleApp.CSharpBasics
     {
         static void Main(string[] args)
         {
+            Person[] personsArray =
+            {
+                new Person("Jack"),
+                new Person("Silvia"),
+                new Person("Fred")
+            };
 
             PhoneNumbers[] phoneNumbersArray =
             {
@@ -15,6 +21,7 @@ namespace ConsoleApp.CSharpBasics
                 new PhoneNumbers("380254254789"),
                 new PhoneNumbers("380741122545")
             };
+
 
             foreach (var phoneNumbers in phoneNumbersArray)
 
