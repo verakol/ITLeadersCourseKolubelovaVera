@@ -1,33 +1,71 @@
-﻿using ConsoleApp.CSharpBasics.Classes;
+﻿using ConsoleApp.CSharpBasics.Classes.OOP.Enums;
+using ConsoleApp.CSharpBasics.Classes.OOP.Implementations;
+using ConsoleApp.CSharpBasics.Classes.OOP.Interfaces;
+using ConsoleApp.CSharpBasics.Classes.OOP.Structs;
+using System.Collections.Generic;
 using static ConsoleApp.CSharpBasics.IO.Output;
 
-namespace ConsoleApp.CSharpBasics
+class Program
 {
-
-    class Program
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
+        IPerson worker = new Person(Sex.Man, new DateOfBirth(1990, 05, 12), "Fred");
+        IPerson manager = new Person(Sex.Woman, new DateOfBirth(2003, 01, 01), "Pamela");
+
+        IPerson[] people = new[]
+            {
+                worker,
+                manager
+            };
+
+        var companyStaff = new List<IEmployee>();
+
+        foreach (var person in people)
         {
-            Person[] personsArray =
+            if (!(person.Age < 18))
             {
-                new Person("Jack"),
-                new Person("Silvia"),
-                new Person("Fred")
-            };
+                var employee = new Employee(person);
 
-            PhoneNumbers[] phoneNumbersArray =
-            {
-                new PhoneNumbers("380254521474"),
-                new PhoneNumbers("380254254789"),
-                new PhoneNumbers("380741122545")
-            };
-
-
-            foreach (var phoneNumbers in phoneNumbersArray)
-
-            {
-                Out.WriteLine(phoneNumbers.GetPhoneNumber());
+                companyStaff.Add(employee);
             }
+        }
+
+        Task task1 = new Task("Repair a tap in the kitchen");
+        Task task2 = new Task("Change lightbulbs in the meeting room 5");
+        Task task3 = new Task("Monitring of turning on central heating");
+        
+        IWorker workerFred = new Worker(companyStaff[0]);
+        IManager managerPamela = new Manager(companyStaff[1]);
+
+        task1 = workerFred.CloseTask(task1);
+        task2 = workerFred.TakeTask(task2);
+        task3 = workerFred.TakeTask(task3);
+
+        var analysis = managerPamela.AnalyzeTeamWork(new[] { task1, task2, task3 });
+
+        Out.WriteLine("Created: " + analysis.created);
+        Out.WriteLine("In Progress: " + analysis.inProgress);
+        Out.WriteLine("Closed: " + analysis.closed);
+
+        IEmployee[] employees = new[]
+            {
+                workerFred,
+                managerPamela,
+                companyStaff[0],
+                companyStaff[1],
+            };
+
+        foreach (var person in people)
+        {
+            Out.WriteLine(person.Sex);
+            Out.WriteLine(person.Name);
+            Out.WriteLine(person.Age);
+            Out.WriteLine(person.DateOfBirth.Year + " " + person.DateOfBirth.Month + " " + person.DateOfBirth.Day);
+        }
+
+        foreach (var employee in employees)
+        {
+            Out.WriteLine("Id: " + employee.Id + "; Name: " + employee.Name + "; Role: " + employee.Role);
         }
     }
 }
