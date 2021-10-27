@@ -1,0 +1,26 @@
+﻿1. Add to your project refferense to Selenium.WebDriver.IEDriver.
+2. Implement logic of IE driver launching
+3. Open the google page in IE browser
+
+
+-------------Answer------------
+
+using OpenQA.Selenium;
+using OpenQA.Selenium.IE;
+using System;
+
+namespace ConsoleApp.WebDriver
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            IWebDriver driver = new InternetExplorerDriver(AppDomain.CurrentDomain.BaseDirectory);
+            driver.Manage().Window.Maximize();
+            driver.Navigate().GoToUrl("https://google.com");
+
+            driver.Close();
+            driver.Quit();
+        }
+    }
+}
