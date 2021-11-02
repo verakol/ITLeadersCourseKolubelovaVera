@@ -18,7 +18,7 @@
         private IList<IWebElement> DropDownList => Driver.FindElements(By.CssSelector("datalist#edulevel option")); // create list with values
 
 
-        private IWebElement EducationCompletedResetButton => Driver.FindElement(By.CssSelector("form p input[type='reset']")); //Reset button near Education completed dropdown
+        private IWebElement EducationEduLevelResetButton => Driver.FindElement(By.CssSelector("form p input[type='reset']")); //Reset button near Education completed dropdown
 
         
         // method that perform chosing an option from Education completed dropdown and insert it in its text input field
@@ -35,6 +35,11 @@
                 }
             }
         }
+
+            public string GetEduLevelOption()
+            {
+                return EduLevelInput.GetAttribute("value");
+            }
         public FormPage InputName(string name)
         {
             NameInput.SendKeys(name);
@@ -73,7 +78,12 @@
             return this;
         }
 
+        public FormPage ClickResetEduLevelButton()
+        {
+            EducationEduLevelResetButton.Click();
 
+            return this;
+        }
 
     }
 }
