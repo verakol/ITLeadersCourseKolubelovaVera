@@ -10,16 +10,16 @@ Link to Lesson 3 video: https://drive.google.com/file/d/1-6nQ8KhKEucIWyeKwp2Lcl7
 
 -------------ANSWER
 
-private IWebElement EduLevelInput => Driver.FindElement(By.CssSelector("input[name='education']")); //Education completed dropdown
+private IWebElement EduLevelInput => Driver.FindElement(By.CssSelector("input[name='education']"));                                 //Education completed dropdown
 
-        private IList<IWebElement> DropDownList => Driver.FindElements(By.CssSelector("datalist#edulevel option")); // create list with values
+        private IList<IWebElement> DropDownList => Driver.FindElements(By.CssSelector("datalist#edulevel option"));                 // create list with values
 
 
-        private IWebElement EducationCompletedResetButton => Driver.FindElement(By.CssSelector("form p input[type='reset']")); //Reset button near Education completed dropdown
+        private IWebElement EducationCompletedResetButton => Driver.FindElement(By.CssSelector("form p input[type='reset']"));      //Reset button near Education completed dropdown
 
         
-        // method that perform chosing an option from Education completed dropdown and insert it in its text input field
-        public void ChooseElement(string option)
+        
+        public void ChooseElement(string option)  // method that perform chosing an option from Education completed dropdown and insert it in its text input field
         {
             foreach (var opt in DropDownList)
             {
@@ -32,3 +32,66 @@ private IWebElement EduLevelInput => Driver.FindElement(By.CssSelector("input[na
                 }
             }
         }
+
+         public string GetEduLevelOption() // method
+            {
+                return EduLevelInput.GetAttribute("value");
+            }
+
+
+            namespace ConsoleApp.WebDriver
+{
+    using ConsoleApp.WebDriver.Pages.Lesson3Forms;
+    using System;
+
+    class Program : BaseTest
+    {
+        public readonly static string url = AppDomain.CurrentDomain.BaseDirectory
+            + @"\Appendix\Lessons\Lesson3_Forms\forms.html";
+
+        static void Main(string[] args)
+        {
+            string expectedEduLevelInput = "High School";
+            try
+            {
+                var formPage = NavigateTo<FormPage>(url);
+
+                formPage.ChooseElement("high school");
+
+                string actualEduLevelInput = formPage.GetEduLevelOption();
+                
+
+                AssertThatEduLevelInputIsCorrect(expectedEduLevelInput, actualEduLevelInput);                   // check out that the chosen option is what you intended to choose in a separate method.
+                
+                formPage.ClickResetEduLevelButton();                                                            // Clear Education completed dropdown input 
+
+                string actualEduLevelInputAfterReset = formPage.GetEduLevelOption();                            // check it out that data was cleared.
+
+                AssertThatEduLevelResetInputIsCorrect("", actualEduLevelInputAfterReset);
+            }
+            catch (Exception)
+            {
+            }
+            finally
+            {
+                DisposeTest();
+            }
+        }
+
+        private static void AssertThatEduLevelInputIsCorrect(string expectedEduLevelInput, string actualEduLevelInput)
+        {
+            if (expectedEduLevelInput != actualEduLevelInput)
+            {
+                throw new Exception($"Actual message {actualEduLevelInput} is not equal to expected one {expectedEduLevelInput}");
+            }
+        }
+
+        private static void AssertThatEduLevelResetInputIsCorrect(string expectedEduLevelInputAfterReset, string actualEduLevelInputAfterReset)
+        {
+            if (expectedEduLevelInputAfterReset != actualEduLevelInputAfterReset)
+            {
+                throw new Exception($"Actual message {actualEduLevelInputAfterReset} is not equal to expected one {expectedEduLevelInputAfterReset}");
+            }
+        }
+    }
+}
