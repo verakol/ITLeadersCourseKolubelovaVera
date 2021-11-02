@@ -1,0 +1,34 @@
+﻿1. Complete class FormPage with necessary properties so that you have locators to navigate and perform actions on
+	a. Education completed dropdown
+	b. Reset button near Education completed dropdown
+2. Implement a method that will perform chosing an option from Education completed dropdown and insert it in its text input field.
+3. In Program class check out that the chosen option is what you intended to choose in a separate method.
+4. Clear Education completed dropdown input and check it out that data was cleared.
+
+Link to Lesson 3 video: https://drive.google.com/file/d/1-6nQ8KhKEucIWyeKwp2Lcl70ZgYGumae/view?usp=sharing
+
+
+-------------ANSWER
+
+private IWebElement EduLevelInput => Driver.FindElement(By.CssSelector("input[name='education']")); //Education completed dropdown
+
+        private IList<IWebElement> DropDownList => Driver.FindElements(By.CssSelector("datalist#edulevel option")); // create list with values
+
+
+        private IWebElement EducationCompletedResetButton => Driver.FindElement(By.CssSelector("form p input[type='reset']")); //Reset button near Education completed dropdown
+
+        
+        // method that perform chosing an option from Education completed dropdown and insert it in its text input field
+        public void ChooseElement(string option)
+        {
+            foreach (var opt in DropDownList)
+            {
+                var optionValue = opt.GetAttribute("value");
+
+                if (option.Equals(optionValue, System.StringComparison.OrdinalIgnoreCase))
+                {
+                    EduLevelInput.SendKeys(optionValue);
+                    EduLevelInput.SendKeys(Keys.Tab);
+                }
+            }
+        }

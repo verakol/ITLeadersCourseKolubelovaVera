@@ -1,20 +1,28 @@
-﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.IE;
-using System;
-
-namespace ConsoleApp.WebDriver
+﻿namespace ConsoleApp.WebDriver
 {
-    class Program
+    using ConsoleApp.WebDriver.Pages.Lesson3Forms;
+    using System;
+
+    class Program : BaseTest
     {
+        public readonly static string url = AppDomain.CurrentDomain.BaseDirectory
+            + @"\Appendix\Lessons\Lesson3_Forms\forms.html";
+
         static void Main(string[] args)
         {
-            IWebDriver driver = new InternetExplorerDriver(AppDomain.CurrentDomain.BaseDirectory);
-            driver.Manage().Window.Maximize();
-            driver.Navigate().GoToUrl("https://google.com");
+            try
+            {
+                var formPage = NavigateTo<FormPage>(url);
 
-            driver.Close();
-            driver.Quit();
+                formPage.ChooseElement("high school");
+            }
+            catch (Exception)
+            {
+            }
+            finally
+            {
+                DisposeTest();
+            }
         }
     }
 }
