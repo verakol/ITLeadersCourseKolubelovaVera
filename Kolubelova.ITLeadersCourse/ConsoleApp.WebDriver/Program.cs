@@ -1,32 +1,51 @@
 ﻿namespace ConsoleApp.WebDriver
 {
-    using ConsoleApp.WebDriver.Pages.Lesson3Forms;
+    using ConsoleApp.WebDriver.Pages.Lesson4Select;
     using System;
+    using System.Collections.Generic;
+    using static ConsoleApp.CSharpBasics.IO.Output;
 
     class Program : BaseTest
     {
         public readonly static string url = AppDomain.CurrentDomain.BaseDirectory
-            + @"\Appendix\Lessons\Lesson3_Forms\forms.html";
+            + @"\Appendix\Lessons\Lesson4_Select\select.html";
 
         static void Main(string[] args)
         {
-            string expectedEduLevelInput = "High School";
+
             try
             {
-                var formPage = NavigateTo<FormPage>(url);
+                SelectPage selectPage = NavigateTo<SelectPage>(url);
 
-                formPage.ChooseElement("high school");
+                string[] optionToBeSelected = { "Mike", "Jane", "Michel" };
 
-                string actualEduLevelInput = formPage.GetEduLevelOption();
-                
+                selectPage.SelectOptionsInMultipleSelectByText(optionToBeSelected); // 1. In Multiple select make a selection of 3 options.
+                List<string> expectedOption = selectPage.GetSelectedOptionsFromMultipleSelect(); // 2. Get all selected options
 
-                AssertThatEduLevelInputIsCorrect(expectedEduLevelInput, actualEduLevelInput);
-                
-                formPage.ClickResetEduLevelButton();
+                //for (int i = 0; i < optionToBeSelected.Length; i++)
+                //{
+                //    Out.WriteLine($"Actual option: {optionToBeSelected[i]}");
+                //}
 
-                string actualEduLevelInputAfterReset = formPage.GetEduLevelOption();
+                //for (int i = 0; i < expectedOption.Count; i++)
+                //{
+                //    Out.WriteLine($"Expected option: {expectedOption[i]}");
+                //}
 
-                AssertThatEduLevelResetInputIsCorrect("", actualEduLevelInputAfterReset);
+                Out.WriteLine($"Expected option: " + String.Join(", ", expectedOption));
+
+                //AssertThatSelectedOptionsAreEqual(expectedOption, optionToBeSelected); // 2. check all selected options out if they are all as expected.
+
+                string deselectOption = "Michel";
+
+                selectPage.DeselectByText(deselectOption); // 3. Deselect one option in the multiple select.
+
+                List<string> expectedOptionAfterDeselect = selectPage.GetSelectedOptionsFromMultipleSelect(); // 4. Get left options form Multiple select and check them if they are as expected.
+
+                selectPage.DeselectAll(); // 5.Deselect all options in the multiple select.
+
+                List<string> expectedOptionAfterDeselectAll = selectPage.GetSelectedOptionsFromMultipleSelect(); //6.Check out that all options were deselected.
+
             }
             catch (Exception)
             {
@@ -37,12 +56,30 @@
             }
         }
 
-        private static void AssertThatEduLevelInputIsCorrect(string expectedEduLevelInput, string actualEduLevelInput)
+        private static void AssertThatSelectedOptionsAreEqual(List<string> expectedOption, string[] optionToBeSelected)
         {
-            if (expectedEduLevelInput != actualEduLevelInput)
+            int expectedOptoinCount = expectedOption.Count;
+            int optionToBeSelectedLenth = optionToBeSelected.Length;
+
+
+            if (expectedOption.Count == optionToBeSelected.Length)
+
             {
-                throw new Exception($"Actual message {actualEduLevelInput} is not equal to expected one {expectedEduLevelInput}");
+                Out.WriteLine("OK");
+
+                foreach (var actOpt in optionToBeSelected)
+                {
+                    if (actOpt)
+                    {
+                        throw new Exception($"");
+                    }
+                }
             }
+            else
+            {
+                throw new Exception("Lengths of expected and actual lists aren't equal");
+            }
+
         }
 
         private static void AssertThatEduLevelResetInputIsCorrect(string expectedEduLevelInputAfterReset, string actualEduLevelInputAfterReset)
