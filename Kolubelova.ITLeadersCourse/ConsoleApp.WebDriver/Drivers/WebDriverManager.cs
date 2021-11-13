@@ -1,15 +1,16 @@
 ﻿namespace ConsoleApp.WebDriver.Drivers
 {
-    using System;
     using ConsoleApp.WebDriver.Drivers.Implementations;
     using ConsoleApp.WebDriver.Enums;
     using OpenQA.Selenium;
+    using System;
+    using static AppSettings.SettingsCongfigurator;
 
     public class WebDriverManager
     {
         private static IWebDriver driver;
 
-        private static BrowserType BrowerType => BrowserType.Chrome;
+        private static BrowserType BrowerType => Settings.BrowserType;
 
         private static string PathToDriver => AppDomain.CurrentDomain.BaseDirectory;
 

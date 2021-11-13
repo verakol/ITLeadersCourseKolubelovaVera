@@ -1,55 +1,55 @@
 ﻿namespace ConsoleApp.WebDriver
 {
-    using ConsoleApp.WebDriver.Pages.Lesson5Modals;
+    using ConsoleApp.WebDriver.Helpers;
+    using ConsoleApp.WebDriver.Pages.Lesson6AdditionalWindows;
     using System;
     using static ConsoleApp.CSharpBasics.IO.Output;
+    using static ConsoleApp.WebDriver.AppSettings.SettingsCongfigurator;
 
     class Program : BaseTest
     {
-        public readonly static string url = AppDomain.CurrentDomain.BaseDirectory
-            + @"\Appendix\Lessons\Lesson5_Modals\modals.html";
-
         static void Main(string[] args)
         {
 
             try
             {
-                ModalsPage modalsPage = NavigateTo<ModalsPage>(url);
+                var additionalWindowPage = NavigateTo<AdditionalWindowsPage>(AppDomain.CurrentDomain.BaseDirectory + Settings.Urls.UrlLesson6HomeTask);
+                var additionalWindowHandle = WindowHelper.AddWindow();
+                var newBrowserWindowPage = additionalWindowPage.ClickNewBrowserWindowButton();
 
-                var expectedEmail = "john@gmail.com";
+                var newBrowserWindowHandle = WindowHelper.AddWindow();
+                WindowHelper.SwitchTo(newBrowserWindowHandle);
+                var expUrl = "https://ultimateqa.com/automation";
 
-                modalsPage.ClickSubmitEmailButton();
+                // Get New browser window url compare it with expected 
+                var actUrl = newBrowserWindowPage.GetUrl();
 
-                modalsPage.InputEmailAndAcceptAlert(expectedEmail); // 3, 4. Enter email in Promt modal and accept the Promt
+                AssertCorrectData(expUrl, actUrl);
 
-                var actualEmail = modalsPage.GetEmailSubmittedMessage().Split(":")[1].TrimStart(); // 6. Get promted message
+                WindowHelper.SwitchTo(additionalWindowHandle); // Switch to AdditionalWindows window
 
-                AssertThatEmailIsCorrect(expectedEmail, actualEmail); // 7. compare promted message with expected one
+                var newMessageWindowPage = additionalWindowPage.ClickNewMessageWindowButton(); // Open New message window
+                var newMessageWindowHandle = WindowHelper.AddWindow();
+                WindowHelper.SwitchTo(newMessageWindowHandle);
 
+                var actMessage = newMessageWindowPage.GetMessage();
+                var expMessage = "Knowledge increases by sharing but not by saving. Please share this website with your friends and in your organization.";
+                AssertCorrectData(expMessage, actMessage);
 
-                modalsPage.ClickSubmitEmailButton();
+                WindowHelper.SwitchTo(additionalWindowHandle); // 9. Switch to AdditionalWindows window
 
-                modalsPage.InputEmailAndDismissAlert(expectedEmail); // step 8, 9. Dismiss Promt modal
+                var newBrowserTabPage = additionalWindowPage.ClickNewBrowserTabButton(); // 10. Open New browser tab by clicking 
+                var newBrowserTabWindowHandle = WindowHelper.AddWindow();
+                WindowHelper.SwitchTo(newBrowserTabWindowHandle);
 
-                var expectedDismissMes = "Email submission canceled!";
+                var actTitle = newBrowserTabPage.GetTitle(); //Get New Browser Tab title
+                var expTitle = "Automation Practice - Ultimate QA";
+                AssertCorrectData(expTitle, actTitle);
 
-                var actualDismissMes = modalsPage.GetEmailSubmittedMessage(); // 10. Get promted dismissed message
+                WindowHelper.SwitchTo(additionalWindowHandle);
 
-                AssertThatDismissedMesIsCorrect(expectedDismissMes, actualDismissMes); // 10. compare promted dismissed message with expected one
+                WindowHelper.CloseAllBut(additionalWindowHandle);
 
-
-
-                var emptyString = string.Empty;
-
-                modalsPage.ClickSubmitEmailButton();
-
-                modalsPage.InputEmailAndAcceptAlert(emptyString); // 12. Input empty string in Promt modal and accept the Promt
-
-                var expectedEmptyStringMes = "Please, input your email!";
-
-                var actualEmptyStringMes = modalsPage.GetEmailSubmittedMessage(); // 13. Get emty string message
-
-                AssertThatEmptyEmailMesIsCorrect(expectedEmptyStringMes, actualEmptyStringMes); // 10. compare emty string message with expected one
 
             }
             catch (Exception)
@@ -62,16 +62,16 @@
         }
 
 
-        private static void AssertThatEmailIsCorrect(string expectedEmail, string actualEmail)
+        private static void AssertCorrectData(string expUrl, string actUrl)
         {
-            if (expectedEmail != actualEmail)
+            if (expUrl != actUrl)
             {
-                throw new Exception($"Actual email {actualEmail} is not equal to expected one {expectedEmail}");
+                throw new Exception($"Actual data {actUrl} is not equal to expected one {expUrl}");
             }
 
             else
             {
-                Out.WriteLine($"Emails are equal. Expected email: {expectedEmail}; Actual email: {actualEmail}");
+                Out.WriteLine($"Data is correct. Expected data: {expUrl}; Actual data: {actUrl}");
             }
         }
 
