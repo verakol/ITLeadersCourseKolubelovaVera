@@ -6,9 +6,14 @@ namespace ConsoleApp.WebDriver.Pages.Lesson6AdditionalWindows
     {
         private IWebElement TitleText => FindElement(By.XPath("//head/title['Automation Practice | Ultimate QA']"));
 
-        public string GetTitle()
+        //public string GetTitle()
+        //{
+        //  return TitleText.Text;
+        //}
+
+        public string GetPageTitle()
         {
-            return TitleText.Text;
+            return Driver.Title;
         }
     }
 }
