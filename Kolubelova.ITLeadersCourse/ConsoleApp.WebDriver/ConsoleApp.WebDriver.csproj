@@ -23,7 +23,7 @@
     <None Update="Appendix\HomeTasks\Lesson6\additional-windows.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Appendix\HomeTasks\Lesson6\new-message-page.html">
+    <None Update="Appendix\HomeTasks\Lesson6\new-message-window.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Appendix\Lessons\Lesson1_HtmlCssIntroduction\index.html">
@@ -48,6 +48,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Appendix\Lessons\Lesson6_AdditionalWindows\third-window.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Appendix\Lessons\Lesson7_IFrame\iframe.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Appendix\Lessons\Lesson7_IFrame\iframe1.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Appendix\Lessons\Lesson7_IFrame\iframe2.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="AppSettings\Files\appsettings.json">

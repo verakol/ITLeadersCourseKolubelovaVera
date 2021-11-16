@@ -12,6 +12,7 @@
         {
             public string UrlLesson6 { get; set; }
             public string UrlLesson6HomeTask { get; set; }
+            public string UrlLesson7 { get; set; }
         }
     }
 }
