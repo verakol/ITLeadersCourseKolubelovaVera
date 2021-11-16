@@ -1,58 +1,55 @@
-﻿namespace ConsoleApp.WebDriver
+﻿
+using ConsoleApp.WebDriver.Pages.Lesson7IFrame;
+using System;
+using static ConsoleApp.CSharpBasics.IO.Output;
+using static ConsoleApp.WebDriver.AppSettings.SettingsCongfigurator;
+
+namespace ConsoleApp.WebDriver
 {
-    using ConsoleApp.WebDriver.Helpers;
-    using ConsoleApp.WebDriver.Pages.Lesson6AdditionalWindows;
-    using System;
-    using static ConsoleApp.CSharpBasics.IO.Output;
-    using static ConsoleApp.WebDriver.AppSettings.SettingsCongfigurator;
 
     class Program : BaseTest
     {
+        private static readonly string url = AppDomain.CurrentDomain.BaseDirectory + Settings.Urls.UrlLesson7;
         static void Main(string[] args)
         {
 
             try
             {
-                var additionalWindowPage = NavigateTo<AdditionalWindowsPage>(AppDomain.CurrentDomain.BaseDirectory + Settings.Urls.UrlLesson6HomeTask);
-                var additionalWindowHandle = WindowHelper.AddWindow();
-                var newBrowserWindowPage = additionalWindowPage.ClickNewBrowserWindowButton();
+                IFramePage iFramePage = NavigateTo<IFramePage>(url); // Go to iframe.html
 
-                var newBrowserWindowHandle = WindowHelper.AddWindow();
-                WindowHelper.SwitchTo(newBrowserWindowHandle);
-                var expUrl = "https://ultimateqa.com/automation";
+                SecondFramePage secondFramePage = iFramePage.SwitchToSecondFrame(); // Go to Frame2
 
-                // Get New browser window url compare it with expected 
-                var actUrl = newBrowserWindowPage.GetUrl();
+                FirstFramePage firstFramePage = secondFramePage.SwitchToFirstFrameElement(); // Go to Frame1
 
-                AssertCorrectData(expUrl, actUrl);
+                string firstName = firstFramePage.GetNameFromFirstFrame(); //Get a name
 
-                WindowHelper.SwitchTo(additionalWindowHandle); // Switch to AdditionalWindows window
+                secondFramePage.SwitchToSelfFrameTwo(); // Return to Frame2
 
-                var newMessageWindowPage = additionalWindowPage.ClickNewMessageWindowButton(); // Open New message window
-                var newMessageWindowHandle = WindowHelper.AddWindow();
-                WindowHelper.SwitchTo(newMessageWindowHandle);
-                var expMessage = "Knowledge increases by sharing but not by saving. Please share this website with your friends and in your organization.";
-                var actMessage = newMessageWindowPage.GetMessage();
-                //AssertCorrectData(expMessage, actMessage);
 
-                WindowHelper.SwitchTo(additionalWindowHandle); // 9. Switch to AdditionalWindows window
+                string lastName = secondFramePage.GetNameTextField(); // Get Last Name
 
-                var newBrowserTabPage = additionalWindowPage.ClickNewBrowserTabButton(); // 10. Open New browser tab by clicking 
-                var newBrowserTabWindowHandle = WindowHelper.AddWindow();
-                WindowHelper.SwitchTo(newBrowserTabWindowHandle);
+                iFramePage.SwitchToSelf(); // Go to parent page
 
-                var actTitle = newBrowserTabPage.GetPageTitle(); //Get New Browser Tab title
-                var expTitle = "Automation Practice | Ultimate QA";
-                //AssertCorrectData(expTitle, actTitle);
+                string fullName = String.Concat(firstName, " ", lastName);
 
-                WindowHelper.SwitchTo(additionalWindowHandle);
+                iFramePage.InputName(fullName);
 
-                WindowHelper.CloseAllBut(additionalWindowHandle);
+                iFramePage.ClickUserNameButton();
+
+                string actFullName = iFramePage.GetResult();
+
+
+                AssertCorrectData(fullName, actFullName);
+
+
+
+
 
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Out.WriteLine(ex);
             }
             finally
             {
@@ -61,16 +58,16 @@
         }
 
 
-        private static void AssertCorrectData(string expUrl, string actUrl)
+        private static void AssertCorrectData(string expectedString, string actualString)
         {
-            if (expUrl != actUrl)
+            if (expectedString != actualString)
             {
-                throw new Exception($"Actual data {actUrl} is not equal to expected one {expUrl}");
+                throw new Exception($"Actual data {actualString} is not equal to expected one {expectedString}");
             }
 
             else
             {
-                Out.WriteLine($"Data is correct. Expected data: {expUrl}; Actual data: {actUrl}");
+                Out.WriteLine($"Data is correct. Expected data: {expectedString}; Actual data: {actualString}");
             }
         }
     }

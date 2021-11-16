@@ -6,7 +6,7 @@ namespace ConsoleApp.WebDriver.Pages.Lesson6AdditionalWindows
     {
         private IWebElement NewBrowserWindowButton => FindElement(By.Id("button1"));
 
-        private IWebElement NewMessageWindowButton => FindElement(By.CssSelector("#content > div:nth-child(4) > p > button"));
+        private IWebElement NewMessageWindowButton => FindElement(By.CssSelector("#content > div:nth-child(4) > p > button")); //XPath ("//div[2]/p/button[text()='New Message Window']")
 
         private IWebElement NewBrowserTabButton => FindElement(By.CssSelector("#content > div:nth-child(5) > p:nth-child(1) > button"));
 
