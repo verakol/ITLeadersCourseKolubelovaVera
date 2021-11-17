@@ -59,7 +59,7 @@ namespace ConsoleApp.WebDriver.Pages.Lesson7IFrame
 
         public string GetResult()
         {
-            return Result.Text.Split(": ")[2];
+            return Result.Text.Split(": ")[1];
 
         }
 
