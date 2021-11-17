@@ -10,5 +10,12 @@ namespace ConsoleApp.WebDriver.Pages.Lesson7IFrame
         public string GetNameTextField() => NameTextField.Text;
 
         public string GetNameFromFirstFrame() => NameTextField.Text.Split(": ")[1];
+
+        public SecondFramePage SwitchToParent()
+        {
+            Driver.SwitchTo().ParentFrame();
+
+            return new SecondFramePage();
+        }
     }
 }

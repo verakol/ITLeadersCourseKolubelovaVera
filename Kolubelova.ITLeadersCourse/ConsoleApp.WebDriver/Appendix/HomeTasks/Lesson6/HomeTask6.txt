@@ -43,8 +43,8 @@ namespace ConsoleApp.WebDriver
                 WindowHelper.SwitchTo(newBrowserWindowHandle);
                 var expUrl = "https://ultimateqa.com/automation";
 
-                // Get New browser window url compare it with expected 
-                var actUrl = newBrowserWindowPage.GetUrl();
+
+                var actUrl = newBrowserWindowPage.GetUrl(); // Get New browser window url compare it with expected
 
                 AssertCorrectData(expUrl, actUrl);
 
@@ -55,9 +55,8 @@ namespace ConsoleApp.WebDriver
                 WindowHelper.SwitchTo(newMessageWindowHandle);
                 var expMessage = "Knowledge increases by sharing but not by saving. Please share this website with your friends and in your organization.";
                 var actMessage = newMessageWindowPage.GetMessage();
-                Out.WriteLine($"Data is correct. Expected data: {expMessage}; Actual data: {actMessage}");
 
-                //AssertCorrectData(expMessage, actMessage);
+                AssertCorrectData(expMessage, actMessage);
 
                 WindowHelper.SwitchTo(additionalWindowHandle); // 9. Switch to AdditionalWindows window
 
@@ -67,7 +66,7 @@ namespace ConsoleApp.WebDriver
 
                 var actTitle = newBrowserTabPage.GetPageTitle(); //Get New Browser Tab title
                 var expTitle = "Automation Practice | Ultimate QA";
-                //AssertCorrectData(expTitle, actTitle);
+                AssertCorrectData(expTitle, actTitle);
 
                 WindowHelper.SwitchTo(additionalWindowHandle);
 
@@ -85,17 +84,18 @@ namespace ConsoleApp.WebDriver
         }
 
 
-        private static void AssertCorrectData(string expUrl, string actUrl)
+        private static void AssertCorrectData(string expectedString, string actualString)
         {
-            if (expUrl != actUrl)
+            if (expectedString != actualString)
             {
-                throw new Exception($"Actual data {actUrl} is not equal to expected one {expUrl}");
+                throw new Exception($"Actual data {actualString} is not equal to expected one {expectedString}");
             }
 
             else
             {
-                Out.WriteLine($"Data is correct. Expected data: {expUrl}; Actual data: {actUrl}");
+                Out.WriteLine($"Data is correct. Expected data: {expectedString}; Actual data: {actualString}");
             }
         }
     }
 }
+

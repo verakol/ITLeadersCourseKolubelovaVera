@@ -8,7 +8,8 @@ namespace ConsoleApp.WebDriver.Pages.Lesson6AdditionalWindows
 
         public string GetMessage()
         {
-            return MessageText.Text;
+            char quotes = '"';
+            return MessageText.Text.Trim(quotes);
         }
     }
 }

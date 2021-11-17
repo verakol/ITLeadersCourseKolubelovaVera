@@ -16,14 +16,6 @@ namespace ConsoleApp.WebDriver.Pages.Lesson7IFrame
 
         }
 
-        public SecondFramePage SwitchToSelfFrameTwo()
-        {
-            Driver.SwitchTo().DefaultContent();
-
-            return new SecondFramePage();
-        }
-
-
 
         public string GetNameTextField() => LastNameTextField.Text.Split(": ")[1];
     }
