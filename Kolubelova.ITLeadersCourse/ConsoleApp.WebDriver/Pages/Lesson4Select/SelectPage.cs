@@ -59,13 +59,13 @@
             return new SelectElement(GroupedSelect).SelectedOption.Text;
         }
 
-        public void SelectOptionsInMultipleSelectByText(params string[] name)
+        public void SelectOptionsInMultipleSelectByText(params string[] names)
         {
             SelectElement select = new SelectElement(MultipleSelect);
 
-            foreach (var opt in name)
+            foreach (var name in names)
             {
-                select.SelectByText(opt);
+                select.SelectByText(name);
             }
         }
 
@@ -83,11 +83,11 @@
             return selectedOptions;
         }
 
-        public void DeselectByText(string name)
+        public void DeselectByText(params string[] names)
         {
             SelectElement select = new SelectElement(MultipleSelect);
 
-            foreach (var opt in select.AllSelectedOptions)
+            foreach (var name in names)
             {
                 select.DeselectByText(name);
             }
