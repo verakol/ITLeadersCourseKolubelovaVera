@@ -1,4 +1,16 @@
-﻿using ConsoleApp.WebDriver.Pages.Lesson9WebDriverWait;
+﻿1. Open wait-for-message.html page
+2. Click on Launch Code Execution button
+3. Wait until Try to Click is enabled
+4. Click on Try to Click button
+5. Get message
+
+Use WebDriverWait for achieve the result!!!
+
+Link to Lesson 9 video: https://drive.google.com/file/d/1-mmgJRwjc2ottYjyzlc8QFtFBvFnEVsV/view?usp=sharing
+
+-----------------ANSWER---------
+
+using ConsoleApp.WebDriver.Pages.Lesson9WebDriverWait;
 using System;
 using static ConsoleApp.CSharpBasics.IO.Output;
 using static ConsoleApp.WebDriver.AppSettings.SettingsCongfigurator;
